@@ -1,6 +1,7 @@
 The MIT License (MIT)
 
-Copyright (c) 2014 Gabriele Cirulli
+Original work Copyright (c) 2014 Gabriele Cirulli
+Modified work Copyright (c) 2014 Emil Stolarsky
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
