@@ -1,6 +1,7 @@
 function GameManager(options, InputManager, Actuator, socket) {
   this.size         = options.size; // Size of the grids
   this.options      = options;
+
   this.socket = socket;
   
   if (options.online) {
@@ -27,7 +28,7 @@ function GameManager(options, InputManager, Actuator, socket) {
 // Restart the game
 GameManager.prototype.restart = function () {
   this.grid = new Grid(this.size);
-  this.actuator.actuate();
+  this.actuator.actuate(this.grid, {score: 0, over: false, won: false});
   this.actuator.restart();
   //this.setup();
 };
@@ -88,10 +89,27 @@ GameManager.prototype.addRandomTile = function (cb) {
 
 // Sends the updated grid to the actuator
 GameManager.prototype.actuate = function () {
+  var self = this;
+  var didWeWin = this.movesAvailable() && (this.won || ((window._io.player[this.options.player] > window._io.player[this.otherPlayer]) && (this.over || window._io.gameOver)));
+  var isItOver = (this.over || window._io.gameOver);
+  window._io.addListener(function (msg) {
+    if (!(msg.player === self.options.otherPlayer && msg.gameEnd)) return;
+    
+    self.over = self.won = true;
+    self.actuator.actuate(self.grid, {
+      score: self.score,
+      over:  self.over,
+      won: self.won
+    });
+  });
+  if (isItOver && !didWeWin && !this.options.sentBefore) {
+    this.socket.send(JSON.stringify({player: this.options.player, gameEnd: true}));
+    this.options.sentBefore = true;
+  }
   this.actuator.actuate(this.grid, {
     score: this.score,
-    over:  (this.over || window._io.gameOver),
-    won:   this.won || ((window._io.player[this.options.player] > window._io.player[(this.options.player === 1 ? 2 : 1)]) && (this.over || window._io.gameOver))
+    over:  isItOver,
+    won: didWeWin
   });
 };
 
@@ -169,7 +187,7 @@ GameManager.prototype.move = function (direction) {
     this.addRandomTile(function () {
       if (!self.movesAvailable() || window._io.gameOver) {
         self.over = true; // Game over!
-        self.won = window._io.player[self.options.player] > window._io.player[(self.options.player === 1 ? 2 : 1)];
+        self.won = window._io.player[self.options.player] > window._io.player[(self.otherPlayer)];
       }
 
       self.actuate();

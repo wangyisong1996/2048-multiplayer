@@ -92,6 +92,10 @@ h1.title {
   font-weight: bold;
 }
 
+.text-center {
+  text-align: center;
+}
+
 .btn {
   display: inline-block;
   background: #8f7a66;
