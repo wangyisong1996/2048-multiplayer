@@ -159,7 +159,7 @@ document.addEventListener("DOMContentLoaded", function () {
 				   			}, 750);
 				   			
 				   			window._io.addOneTimeListener(function (msg) {
-							  	//gameOver(timer);
+							  	gameOver(timer);
 							}, function (msg) {
 								return !!msg.gameEnd;
 							});
