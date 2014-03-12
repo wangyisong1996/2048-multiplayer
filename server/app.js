@@ -7,7 +7,9 @@ var http = require('http'),
 	lodash = require('lodash'),
 	uuid = require('node-uuid'),
   	sockjs = require('sockjs'),
-  	multiplex_server = require('websocket-multiplex');
+  	multiplex_server = require('websocket-multiplex'),
+  	redis = require("redis"),
+    client = redis.createClient();
 
 if (cluster.isMaster) {
   // Fork workers.
@@ -19,7 +21,7 @@ if (cluster.isMaster) {
     console.log('worker ' + worker.process.pid + ' died');
   });
 } else {
-	var sockjsServer = sockjs.createServer({jsessionid: true});
+	var sockjsServer = sockjs.createServer();
 	var multiplexer = new multiplex_server.MultiplexServer(sockjsServer);
 	var GRID_SIZE = 4;
 	// console.log('url.parse(req.url):', qs.parse(url.parse(req.url).pathname));
@@ -70,17 +72,24 @@ if (cluster.isMaster) {
 			headers['Access-Control-Allow-Origin'] = '*';
 	        headers['Access-Control-Allow-Headers'] = 'X-Requested-With';
 			res.writeHead(200, headers);
-			if (freeChannels.length === 0) {
-				var channelId = uuid.v4();
-				createChannel(channelId, function (err) {
-					if (err) console.log('err:', err);
-					freeChannels.push(channelId);
-					res.end(JSON.stringify({player: 1, channel: channelId}));
-				});
-			}
-			else {
-				res.end(JSON.stringify({player: 2, channel: freeChannels.pop()}));
-			}
+			client.llen('listOfChannels', function(err, listSize) {
+				if (err) console.log(err);
+				if (listSize === 0) {
+					var channelId = uuid.v4();
+					createChannel(channelId, function (err) {
+						if (err) console.log('err:', err);
+						client.lpush('listOfChannels', channelId);
+						freeChannels.push(channelId);
+						res.end(JSON.stringify({player: 1, channel: channelId}));
+					});
+				}
+				else {
+					client.lpop('listOfChannels', function (error, channelId) {
+						if (error) console.log(error);
+						res.end(JSON.stringify({player: 2, channel: channelId}));
+					});
+				}
+			});
 		}
 		else {
 			res.writeHead(200, {'Content-Type': 'text/html'});
