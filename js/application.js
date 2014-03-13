@@ -165,7 +165,8 @@ document.addEventListener("DOMContentLoaded", function () {
 							});
 
 							window._io.addOneTimeListener(function (msg) {
-							  	gameOver(timer, 'Connection Lost :(');
+							  	//console.log('msg sent was dead');
+							  	// gameOver(timer, 'Connection Lost :(');
 							}, function (msg) {
 								return !!msg.dead;
 							});
