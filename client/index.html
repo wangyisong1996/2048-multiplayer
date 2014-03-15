@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>2048 - Multiplayer</title>
+  <!-- Game CSS -->
+  <link href="style/main.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+  <div class="container">
+    <div class="heading">
+      <h1 class="title">2048 - Multiplayer</h1>
+    </div>
+    <p class="game-intro">Join the numbers and get to the <strong>2048 tile!</strong> Your square is on the left!</p>
+    <div class="scores">
+      <div class="score-container" style="float: left">0</div>
+      <div class="" style="margin-top: 15px; position: absolute; left: 50%">
+        <div style="position: relative; left: -50%">
+          <p id="player-msg"  class="text-center" style="width: 230px; height: 30px">
+            <a id="game-start-btn" class="btn">Find a Competitor!</a>
+          </p>
+        </div>
+      </div>
+      <div class="score-container" style="float: right">0</div>
+    </div>
+    <div class="game-boards">
+      
+      <div id="player-local" style="display:inline-block">
+        <div class="game-container">
+          
+          <div class="game-message">
+            <p></p>
+          </div>
+
+          <div class="grid-container">
+            <div class="grid-row">
+              <div class="grid-cell"></div>
+              <div class="grid-cell"></div>
+              <div class="grid-cell"></div>
+              <div class="grid-cell"></div>
+            </div>
+            <div class="grid-row">
+              <div class="grid-cell"></div>
+              <div class="grid-cell"></div>
+              <div class="grid-cell"></div>
+              <div class="grid-cell"></div>
+            </div>
+            <div class="grid-row">
+              <div class="grid-cell"></div>
+              <div class="grid-cell"></div>
+              <div class="grid-cell"></div>
+              <div class="grid-cell"></div>
+            </div>
+            <div class="grid-row">
+              <div class="grid-cell"></div>
+              <div class="grid-cell"></div>
+              <div class="grid-cell"></div>
+              <div class="grid-cell"></div>
+            </div>
+          </div>
+
+          <div class="tile-container">
+
+          </div>
+        </div>
+      </div>
+      <div id="player-online" style="display:inline-block; float: right;">
+        <div class="game-container ">
+          
+          <div class="game-message">
+            <p></p>
+          </div>
+
+          <div class="grid-container">
+            <div class="grid-row">
+              <div class="grid-cell"></div>
+              <div class="grid-cell"></div>
+              <div class="grid-cell"></div>
+              <div class="grid-cell"></div>
+            </div>
+            <div class="grid-row">
+              <div class="grid-cell"></div>
+              <div class="grid-cell"></div>
+              <div class="grid-cell"></div>
+              <div class="grid-cell"></div>
+            </div>
+            <div class="grid-row">
+              <div class="grid-cell"></div>
+              <div class="grid-cell"></div>
+              <div class="grid-cell"></div>
+              <div class="grid-cell"></div>
+            </div>
+            <div class="grid-row">
+              <div class="grid-cell"></div>
+              <div class="grid-cell"></div>
+              <div class="grid-cell"></div>
+              <div class="grid-cell"></div>
+            </div>
+          </div>
+
+          <div class="tile-container">
+
+          </div>
+        </div>  
+      </div>
+    </div>
+    
+
+    <p class="game-explanation">
+      <strong class="important">How to play:</strong> Use your <strong>arrow keys</strong> to move the tiles. When two tiles with the same number touch, they <strong>merge into one!</strong>
+    </p>
+    <hr>
+    <p>
+     Created by <a href="http://gabrielecirulli.com" target="_blank">Gabriele Cirulli.</a> Based on <a href="https://itunes.apple.com/us/app/1024!/id823499224" target="_blank">1024 by Veewo Studio.</a>  Multiplayer added by <a href="http://stolarsky.com" target="_blank">Emil Stolarsky.</a> 
+    </p>
+  </div>
+  <!-- Libraries JS -->
+  <script src="libs/jquery-2.1.0/jquery.min.js"></script>
+  <script src="http://cdn.sockjs.org/sockjs-0.3.min.js"></script>
+  <script src="http://cdn.sockjs.org/websocket-multiplex-0.1.js"></script>
+
+  <!-- Game JS -->
+  <script src="js/online_input_manager.js"></script>
+  <script src="js/keyboard_input_manager.js"></script>
+  <script src="js/html_actuator.js"></script>
+  <script src="js/grid.js"></script>
+  <script src="js/tile.js"></script>
+  <script src="js/game_manager.js"></script>
+  <script src="js/application.js"></script>
+</body>
+</html>
