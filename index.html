@@ -1,132 +1,70 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8">
-  <title>2048 - Multiplayer</title>
-  <!-- Game CSS -->
-  <link href="style/main.css" rel="stylesheet" type="text/css">
-</head>
-<body>
-  <a href="https://github.com/EmilS/2048-multiplayer"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://github-camo.global.ssl.fastly.net/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png"></a>
-  <div class="container">
-    <div class="heading">
-      <h1 class="title">2048 - Multiplayer</h1>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="2048-multiplayer : Give it a try here:" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>2048-multiplayer</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/wangyisong1996/2048-multiplayer">View on GitHub</a>
+
+          <h1 id="project_title">2048-multiplayer</h1>
+          <h2 id="project_tagline">Give it a try here:</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/wangyisong1996/2048-multiplayer/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/wangyisong1996/2048-multiplayer/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
     </div>
-    <p class="game-intro">Join the numbers and get to the <strong>2048 tile!</strong> Your square is on the left!</p>
-    <div class="scores">
-      <div class="score-container" style="float: left">0</div>
-      <div class="" style="margin-top: 15px; position: absolute; left: 50%">
-        <div style="position: relative; left: -50%">
-          <p id="player-msg"  class="text-center" style="width: 230px; height: 30px">
-            <a id="game-start-btn" class="btn">Find a Competitor!</a>
-          </p>
-        </div>
-      </div>
-      <div class="score-container" style="float: right">0</div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
+<a name="2048" class="anchor" href="#2048"><span class="octicon octicon-link"></span></a>2048</h1>
+
+<p>A small clone of <a href="https://play.google.com/store/apps/details?id=com.veewo.a1024">1024</a>, based on <a href="saming.fr/p/2048/">Saming's 2048</a> (also a clone).</p>
+
+<p>Made just for fun. <a href="http://gabrielecirulli.github.io/2048/">Play it here!</a></p>
+
+<p><a href="http://pictures.gabrielecirulli.com/2048-20140309-234100.png"><img src="http://pictures.gabrielecirulli.com/2048-20140309-234100.png" alt="Screenshot"></a></p>
+
+<p>That screenshot is fake by, the way. I never reached 2048 <img class="emoji" title=":smile:" alt=":smile:" src="https://github.global.ssl.fastly.net/images/icons/emoji/smile.png" height="20" width="20" align="absmiddle"></p>
+
+<h2>
+<a name="contributing" class="anchor" href="#contributing"><span class="octicon octicon-link"></span></a>Contributing</h2>
+
+<p>Changes and improvements are more than welcome! Feel free to fork and open a pull request. Please make your changes in a specifically made branch and request to pull on <code>master</code>! If you can, please make sure the game fully works before sending the PR, as that will help speed up the process.</p>
+
+<p>You can find the same information in the <a href="https://github.com/gabrielecirulli/2048/blob/master/CONTRIBUTING.md">contributing guide.</a></p>
+
+<h2>
+<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h2>
+
+<p>2048 is licensed under the <a href="https://github.com/gabrielecirulli/2048/blob/master/LICENSE.txt">MIT license.</a></p>
+      </section>
     </div>
-    <div class="game-boards">
-      
-      <div id="player-local" style="display:inline-block">
-        <div class="game-container">
-          
-          <div class="game-message">
-            <p></p>
-          </div>
 
-          <div class="grid-container">
-            <div class="grid-row">
-              <div class="grid-cell"></div>
-              <div class="grid-cell"></div>
-              <div class="grid-cell"></div>
-              <div class="grid-cell"></div>
-            </div>
-            <div class="grid-row">
-              <div class="grid-cell"></div>
-              <div class="grid-cell"></div>
-              <div class="grid-cell"></div>
-              <div class="grid-cell"></div>
-            </div>
-            <div class="grid-row">
-              <div class="grid-cell"></div>
-              <div class="grid-cell"></div>
-              <div class="grid-cell"></div>
-              <div class="grid-cell"></div>
-            </div>
-            <div class="grid-row">
-              <div class="grid-cell"></div>
-              <div class="grid-cell"></div>
-              <div class="grid-cell"></div>
-              <div class="grid-cell"></div>
-            </div>
-          </div>
-
-          <div class="tile-container">
-
-          </div>
-        </div>
-      </div>
-      <div id="player-online" style="display:inline-block; float:right;">
-        <div class="game-container ">
-          
-          <div class="game-message">
-            <p></p>
-          </div>
-
-          <div class="grid-container">
-            <div class="grid-row">
-              <div class="grid-cell"></div>
-              <div class="grid-cell"></div>
-              <div class="grid-cell"></div>
-              <div class="grid-cell"></div>
-            </div>
-            <div class="grid-row">
-              <div class="grid-cell"></div>
-              <div class="grid-cell"></div>
-              <div class="grid-cell"></div>
-              <div class="grid-cell"></div>
-            </div>
-            <div class="grid-row">
-              <div class="grid-cell"></div>
-              <div class="grid-cell"></div>
-              <div class="grid-cell"></div>
-              <div class="grid-cell"></div>
-            </div>
-            <div class="grid-row">
-              <div class="grid-cell"></div>
-              <div class="grid-cell"></div>
-              <div class="grid-cell"></div>
-              <div class="grid-cell"></div>
-            </div>
-          </div>
-
-          <div class="tile-container">
-
-          </div>
-        </div>  
-      </div>
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">2048-multiplayer maintained by <a href="https://github.com/wangyisong1996">wangyisong1996</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
     </div>
+
     
 
-    <p class="game-explanation">
-      <strong class="important">How to play:</strong> Use your <strong>arrow keys</strong> to move the tiles. When two tiles with the same number touch, they <strong>merge into one!</strong>
-    </p>
-    <hr>
-    <p>
-     Created by <a href="http://gabrielecirulli.com" target="_blank">Gabriele Cirulli.</a> Based on <a href="https://itunes.apple.com/us/app/1024!/id823499224" target="_blank">1024 by Veewo Studio.</a>  Multiplayer added by <a href="http://stolarsky.com" target="_blank">Emil Stolarsky.</a> 
-    </p>
-  </div>
-  <!-- Libraries JS -->
-  <script src="libs/jquery-2.1.0/jquery.min.js"></script>
-  <script src="http://cdn.sockjs.org/sockjs-0.3.min.js"></script>
-  <script src="http://cdn.sockjs.org/websocket-multiplex-0.1.js"></script>
-
-  <!-- Game JS -->
-  <script src="js/online_input_manager.js"></script>
-  <script src="js/keyboard_input_manager.js"></script>
-  <script src="js/html_actuator.js"></script>
-  <script src="js/grid.js"></script>
-  <script src="js/tile.js"></script>
-  <script src="js/game_manager.js"></script>
-  <script src="js/application.js"></script>
-</body>
+  </body>
 </html>
